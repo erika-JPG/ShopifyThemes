@@ -92,14 +92,46 @@
                 {% for transaction in order.transactions %}
                     <div class="mb-4">
                         {% assign credit_card_company = transaction.payment_details.credit_card_company %}
+                        {% assign credit_card_last_four_digits = transaction.payment_details.credit_card_number %}
 
                         {% if credit_card_company %}
                             <p>{{credit_card_company}}</p>
+                            <p>{{credit_card_last_four_digits}}</p>
+
+                            {% case transaction.status_label %}
+                                {% when 'Failure' %}
+                                    {% assign background = 'bg-red-700' %}
+                                {% else %}
+                                    {% assign background = 'bg-green-700' %}
+                            {% endcase %}
+
+                            <span class="{{ background }} rounded-full text-sm px-4 py-1 text-white">{{ transaction.status_label }}</span>
+                            {% else %}
+                            <p class="text-sm mb-4">
+                                This order is manually placed by {{ shop.name }}
+                            </p>
                         {% endif %}
                     </div>
                 {% endfor %}
             </div>
-            <div></div>
+            <div>
+                <table class="table-auto w-full mb-4">
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-200 px-4 py-2">Subtotal</td>
+                            <td class="border border-gray-200 px-4 py-2">{{ order.subtotal_price | money}}</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-200 px-4 py-2">Shipping</td>
+                            <td class="border border-gray-200 px-4 py-2">{{ order.shipping_price |  money }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-200 px-4 py-2">Total</td>
+                            <td class="border border-gray-200 px-4 py-2">{{ order.total_price | money }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 </div>
