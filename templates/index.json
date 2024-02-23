@@ -1,11 +1,22 @@
 {
-    "sections": {
-        "featured-collection":{
-            "type": "featured-collection",
-            "settings": {
-                "featured_collection": "all"
-            }
-        }
+  "sections": {
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured Collection",
+        "featured_collection": "all",
+        "product_limit_display": 6
+      }
     },
-    "order": ["featured-collection"]
+    "contact_form_JV8aVx": {
+      "type": "contact-form",
+      "settings": {
+        "title": "Contact Form"
+      }
+    }
+  },
+  "order": [
+    "featured-collection",
+    "contact_form_JV8aVx"
+  ]
 }
